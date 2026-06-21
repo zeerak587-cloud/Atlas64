@@ -1,0 +1,13 @@
+﻿{
+  "architecture": "32",
+  "kernelSectors": 400,
+  "output": "tinyos.img",
+  "architectures": {
+    "32": { "family": "x86", "bits": 32, "status": "supported" },
+    "x86": { "family": "x86", "bits": 32, "status": "supported" },
+    "64": { "family": "x86_64", "bits": 64, "status": "supported" },
+    "x86_64": { "family": "x86_64", "bits": 64, "status": "supported" },
+    "arm": { "family": "arm", "bits": 32, "status": "supported" },
+    "arm64": { "family": "arm64", "bits": 64, "status": "supported" }
+  }
+}
