@@ -1,6 +1,6 @@
 # Atlas32.img
 
-<img="logo.png">
+![Logo](logo.png)
 
 Atlas32.img is a hobby operating system written from scratch in C and x86 Assembly.
 
