@@ -8,8 +8,6 @@ Originally created by Zeerak Khan as a learning project, Atlas32.img runs in 32-
 
 ---
 
-## Features
-t
 ### Boot System
 - Custom x86 BIOS bootloader
 - A20 line enabling
@@ -105,6 +103,9 @@ Shows information about the creator.
 ### Language
 - C
 - x86 Assembly
+- very small portion of Python
+- Shell scripts and bat scripts
+- Linker (.ld)
 
 ### Architecture
 - x86
