@@ -1,13 +1,15 @@
-# TinyTextOS
+# Atlas32.img
 
-TinyTextOS is a hobby operating system written from scratch in C and x86 Assembly.
+<img="logo.png">
 
-Originally created by Zeerak Khan as a learning project, TinyTextOS runs in 32-bit protected mode and includes its own shell, keyboard driver, timer system, speaker support, and RAM-based scripting environment.
+Atlas32.img is a hobby operating system written from scratch in C and x86 Assembly.
+
+Originally created by Zeerak Khan as a learning project, Atlas32.img runs in 32-bit protected mode and includes its own shell, keyboard driver, timer system, speaker support, and RAM-based scripting environment.
 
 ---
 
 ## Features
-
+t
 ### Boot System
 - Custom x86 BIOS bootloader
 - A20 line enabling
@@ -63,7 +65,7 @@ Displays information about the creator:
 
 - Zeerak Khan
 - Started coding at age 6
-- Created TinyTextOS at age 9
+- Created Atlas32.img at age 9
 
 ---
 
@@ -88,7 +90,7 @@ Attempts a hardware reboot.
 Plays a song through the PC speaker.
 
 ### create file
-Opens the TinyTextOS editor.
+Opens the Atlas32.img editor.
 
 ### run binary file
 Runs the currently saved script.
@@ -164,4 +166,4 @@ Text-Mode Development Branch
 
 Graphics experiments have been temporarily removed while the text kernel is stabilized.
 
-TinyTextOS is actively developed and may change frequently.
+Atlas32 is actively developed and may change frequently.
