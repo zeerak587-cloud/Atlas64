@@ -1,4 +1,4 @@
-/* TinyTextOS x86 32-bit kernel linker script */
+/* Atlas32 x86 32-bit kernel linker script */
 
 ENTRY(_start)
 
