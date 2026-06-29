@@ -1,4 +1,4 @@
-/* TinyTextOS freestanding kernel */
+/* Atlas32 freestanding kernel */
 
 // =========================
 // KERNEL ENTRY
@@ -326,7 +326,7 @@ void append_line(const char* line)
 void command_create_file()
 {
     clear_screen();
-    print("TinyTextOS Editor\n");
+    print("Atlas32 Editor\n");
     print("Commands: print (text), delay (number)\n");
     print("Press Enter on two blank lines to save in RAM.\n\n");
 
@@ -572,7 +572,7 @@ void command_help()
 
 void command_about()
 {
-    print("TinyTextOS 32-bit protected mode kernel\n");
+    print("Atlas32 32-bit protected mode kernel\n");
     print("Written in Assembly and C\n");
 }
 
@@ -658,7 +658,7 @@ void kernel_main()
     pit_init_100hz();
     clear_screen();
 
-    print("TinyTextOS\n");
+    print("Atlas32\n");
     print("32-bit protected mode kernel\n\n");
 
     print("Type help for commands\n\n");
