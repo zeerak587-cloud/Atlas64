@@ -1,4 +1,4 @@
-; TinyTextOS x86 32-bit protected-mode entry point
+; Atlas32 x86 32-bit protected-mode entry point
 
 [bits 32]
 
