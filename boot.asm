@@ -1,4 +1,4 @@
-; TinyTextOS BIOS bootloader for x86 32-bit
+; Atlas32 BIOS bootloader for x86 32-bit
 
 [bits 16]
 [org 0x7C00]
