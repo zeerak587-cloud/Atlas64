@@ -1,5 +1,5 @@
 #!/bin/bash
-# TinyTextOS Linux / WSL cleanup script
+# Atlas32 Linux / WSL cleanup script
 
 set -e
 
