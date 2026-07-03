@@ -1,168 +1,151 @@
 # Atlas32.img
 
-![Logo](logo.png)
+Atlas32 is a tiny 32-bit protected-mode operating system written in C and Assembly.
 
-Atlas32.img is a hobby operating system written from scratch in C and x86 Assembly.
+It boots directly into a simple VGA text-mode terminal and includes a small command shell, keyboard input, PC-speaker music playback, a RAM-only text-file system, and a tiny script editor.
 
-Originally created by Zeerak Khan as a learning project, Atlas32.img runs in 32-bit protected mode and includes its own shell, keyboard driver, timer system, speaker support, and RAM-based scripting environment.
+## Features
 
----
-
-### Boot System
-- Custom x86 BIOS bootloader
-- A20 line enabling
-- GDT setup
-- Switch to 32-bit Protected Mode
-- Custom kernel entry point
-
-### Console
-- VGA text mode output
-- Hardware cursor support
-- Screen scrolling
-- Clear screen command
-- Interactive command shell
-
-### Input
-- PS/2 keyboard driver
-- Shift key support
-- Line editing
-- Backspace support
-
-### Timing
-- Programmable Interval Timer (PIT)
-- Delay commands
-- RTC clock access
-- Real-time clock command !!(20 Hours off)
-
-### Audio
-- PC speaker support
-- Tone generation
-- Song playback engine
-
-### Scripting System
-- RAM-based file editor
-- Script storage
-- Script execution
-- Custom commands:
-  - print(text)
-  - delay(seconds)
-
-### System Commands
-- help
-- clear
-- about
-- time
-- reboot
-- play song
-- create file
-- run binary file
-- creator
-
-### Creator Command
-Displays information about the creator:
-
-- Zeerak Khan
-- Started coding at age 6
-- Created Atlas32.img at age 9
-
----
+* 32-bit protected mode kernel
+* Custom bootloader
+* VGA 80×25 text-mode display
+* PS/2 keyboard input
+* Command-line shell
+* Real-time clock command
+* PC-speaker song playback
+* RAM-only text files
+* RAM-only script programs
+* Reboot command
+* No external operating system required
 
 ## Commands
 
-### help
-Lists all available commands.
+| Command           | What it does                         |
+| ----------------- | ------------------------------------ |
+| `help`            | Shows the command list               |
+| `clear`           | Clears the screen                    |
+| `about`           | Shows Atlas32 information            |
+| `time`            | Displays the current RTC time        |
+| `reset`           | Reboots the computer or emulator     |
+| `creator`         | Shows creator information            |
+| `play song`       | Plays a song through the PC speaker  |
+| `create file`     | Creates a RAM-only text file         |
+| `name+`           | Opens a saved text file named `name` |
+| `create program`  | Opens the tiny binary script editor  |
+| `run binary file` | Runs the saved RAM-only script       |
 
-### clear
-Clears the screen.
+## Text Files
 
-### about
-Displays operating system information.
+Atlas32 can store small text files in RAM.
 
-### time
-Shows the current RTC time.
+Run:
 
-### reboot
-Attempts a hardware reboot.
+```text
+create file
+```
 
-### play song
-Plays a song through the PC speaker.
+Type your text, then press Enter twice on blank lines to finish writing. Atlas32 will ask for a file name.
 
-### create file
-Opens the Atlas32.img editor.
+For example:
 
-### run binary file
-Runs the currently saved script.
+```text
+> create file
 
-### creator
-Shows information about the creator.
+| Hello from Atlas32
+| This file only exists in RAM.
+|
+|
 
----
+Name this file: test
+Saved. Type test+ to read it.
+```
 
-## Technical Details
+Later, read it with:
 
-### Language
-- C
-- x86 Assembly
-- very small portion of Python
-- Shell scripts and bat scripts
-- Linker (.ld)
+```text
+test+
+```
 
-### Architecture
-- x86
-- 32-bit Protected Mode
+Text files disappear after rebooting because Atlas32 does not yet have disk storage.
 
-### Video
-- VGA Text Mode
-- Memory Address: 0xB8000
+## Tiny Script Programs
 
-### Audio
-- PC Speaker
-- PIT Frequency Generation
+Atlas32 includes a very small script editor.
 
-### Bootloader
-- BIOS Compatible
-- NASM Assembly
+Run:
 
----
+```text
+create program
+```
+
+Available script commands:
+
+```text
+print (Hello World)
+delay (2)
+```
+
+Example:
+
+```text
+print (Hello from a binary file!)
+delay (1)
+print (This appeared one second later.)
+```
+
+Press Enter twice on blank lines to save the program in RAM, then run:
+
+```text
+run binary file
+```
+
+## Building
+
+Atlas32 needs an x86 cross-compiler, NASM, and a tool such as `make`.
+
+Typical tools needed:
+
+```text
+nasm
+i686-elf-gcc
+i686-elf-ld
+make
+qemu-system-i386
+```
+
+Build the image:
+
+```bash
+make
+```
+
+Run it in QEMU:
+
+```bash
+qemu-system-i386 -drive format=raw,file=Atlas32.img
+```
 
 ## Project Goals
 
-Current Goals:
+Atlas32 is an experiment in making a small operating system from scratch. Future ideas include:
 
-- Stable text-mode operating system
-- Improved scripting language
-- Better command system
-- File system support
-- Mouse support
+* Disk or floppy storage
+* A real filesystem
+* More shell commands
+* Better text editing
+* Color themes
+* Loading programs from disk
+* Mouse support
+* Simple graphics mode
+* A tiny application format
 
-Future Goals:
+## Creator
 
-- FAT12/FAT16 support
-- Disk file storage
-- Windows and menus
-- Simple desktop environment
-- Networking
-- TinyTextOS applications
+Created by Zeerak Khan.
 
----
+* GitHub: https://github.com/zeerak587-cloud
+* Scratch: https://scratch.mit.edu/users/Cute_Seal_WOW/
 
-## Author
+License
 
-Zeerak Khan
-
-GitHub:
-https://github.com/zeerak587-cloud
-
-Scratch:
-https://scratch.mit.edu/users/Cute_Seal_WOW/
-
----
-
-## Status
-
-Current Version:
-Text-Mode Development Branch
-
-Graphics experiments have been temporarily removed while the text kernel is stabilized.
-
-Atlas32 is actively developed and may change frequently.
+This project is licensed under the MIT License.
