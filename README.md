@@ -1,5 +1,7 @@
 # Atlas32.img
 
+![Logo](logo.png)
+
 Atlas32 is a tiny 32-bit protected-mode operating system written in C and Assembly.
 
 It boots directly into a simple VGA text-mode terminal and includes a small command shell, keyboard input, PC-speaker music playback, a RAM-only text-file system, and a tiny script editor.
