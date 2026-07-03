@@ -31,6 +31,14 @@ char binary_file[BINARY_MAX];
 int binary_size = 0;
 int binary_saved = 0;
 
+#define MAX_TEXT_FILES 10
+#define TEXT_FILE_NAME_MAX 32
+#define TEXT_FILE_DATA_MAX 1024
+
+char text_file_names[MAX_TEXT_FILES][TEXT_FILE_NAME_MAX];
+char text_file_data[MAX_TEXT_FILES][TEXT_FILE_DATA_MAX];
+int text_file_count = 0;
+
 // =========================
 // VGA OUTPUT
 // =========================
@@ -319,11 +327,37 @@ void append_line(const char* line)
     append_char('\n');
 }
 
+void copy_string(char* destination, const char* source, int max)
+{
+    int i = 0;
+
+    while (source[i] && i < max - 1)
+    {
+        destination[i] = source[i];
+        i++;
+    }
+
+    destination[i] = 0;
+}
+
+int ends_with_plus(char* text)
+{
+    int length = 0;
+
+    while (text[length])
+        length++;
+
+    if (length < 2)
+        return 0;
+
+    return text[length - 1] == '+';
+}
+
 // =========================
 // TINY BINARY EDITOR
 // =========================
 
-void command_create_file()
+void command_create_program()
 {
     clear_screen();
     print("Atlas32 Editor\n");
@@ -562,12 +596,14 @@ void command_help()
     print("help\n");
     print("clear\n");
     print("create file\n");
+    print("name+        - read a saved text file\n");
     print("run binary file\n");
     print("play song\n");
     print("about\n");
     print("time\n");
-    print("reboot\n");
+    print("reset\n");
     print("creator\n");
+    print("create program\n");
 }
 
 void command_about()
@@ -594,8 +630,103 @@ void command_creator()
     print("Thank You!\n");
 }
 
+void command_create_file()
+{
+if (text_file_count >= MAX_TEXT_FILES)
+{
+print("Text file storage full.\n");
+return;
+}
+
+char file_name[TEXT_FILE_NAME_MAX];
+int data_pos = 0;
+int blank_lines = 0;
+
+clear_screen();
+print("Atlas32 Text File Creator\n");
+print("Type your text.\n");
+print("Press Enter twice on blank lines to save.\n\n");
+
+text_file_data[text_file_count][0] = 0;
+
+while (1)
+{
+    print("| ");
+    read_line(line_buffer, LINE_MAX);
+
+    if (line_buffer[0] == 0)
+    {
+        blank_lines++;
+
+        if (blank_lines >= 2)
+            break;
+    }
+    else
+    {
+        blank_lines = 0;
+    }
+
+    int i = 0;
+
+    while (line_buffer[i] && data_pos < TEXT_FILE_DATA_MAX - 2)
+    {
+        text_file_data[text_file_count][data_pos++] = line_buffer[i++];
+    }
+
+    if (data_pos < TEXT_FILE_DATA_MAX - 1)
+        text_file_data[text_file_count][data_pos++] = '\n';
+}
+
+text_file_data[text_file_count][data_pos] = 0;
+
+print("\nName this file: ");
+read_line(file_name, TEXT_FILE_NAME_MAX);
+
+if (file_name[0] == 0)
+{
+    print("File was not saved because it has no name.\n");
+    return;
+}
+
+copy_string(
+    text_file_names[text_file_count],
+    file_name,
+    TEXT_FILE_NAME_MAX
+);
+
+text_file_count++;
+
+print("Saved. Type ");
+print(file_name);
+print("+ to read it.\n");
+
+}
+
 void execute_command(char* cmd)
 {
+
+if (ends_with_plus(cmd))
+{
+    int length = 0;
+
+    while (cmd[length])
+        length++;
+
+    cmd[length - 1] = 0;
+
+    for (int i = 0; i < text_file_count; i++)
+    {
+        if (strcmp(cmd, text_file_names[i]))
+        {
+            print(text_file_data[i]);
+            return;
+        }
+    }
+
+    print("Text file not found.\n");
+    return;
+}
+
     if (strcmp(cmd, "time"))
     {
         command_time();
@@ -608,7 +739,7 @@ void execute_command(char* cmd)
         return;
     }
 
-    if (strcmp(cmd, "reboot"))
+    if (strcmp(cmd, "reset"))
     {
         command_reboot();
         return;
@@ -647,6 +778,11 @@ void execute_command(char* cmd)
     if (strcmp(cmd, "about"))
     {
         command_about();
+        return;
+    }
+    if (strcmp(cmd, "create program"))
+    {
+        command_create_program();
         return;
     }
 
