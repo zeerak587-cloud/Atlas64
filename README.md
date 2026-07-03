@@ -133,8 +133,6 @@ Current Goals:
 - Improved scripting language
 - Better command system
 - File system support
-- Graphics mode support
-- BMP image viewer
 - Mouse support
 
 Future Goals:
