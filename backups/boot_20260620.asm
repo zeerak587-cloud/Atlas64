@@ -1,4 +1,4 @@
-; TinyTextOS BIOS bootloader for x86 32-bit
+; Atlas32 BIOS bootloader for x86 32-bit
 
 [bits 16]
 [org 0x7C00]
@@ -31,9 +31,6 @@ start:
     int 0x13
 
     jc disk_error
-
-    mov ax, 0x0013
-    int 0x10
 
     cli
     lgdt [gdt_descriptor]
