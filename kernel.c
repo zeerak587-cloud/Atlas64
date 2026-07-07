@@ -6,6 +6,7 @@
 
 
 
+typedef unsigned long long u64;
 typedef unsigned char  u8;
 typedef unsigned short u16;
 typedef unsigned int   u32;
@@ -608,7 +609,7 @@ void command_help()
 
 void command_about()
 {
-    print("Atlas32 32-bit protected mode kernel\n");
+    print("Atlas64 x86-64 long mode kernel\n");
     print("Written in Assembly and C\n");
 }
 
@@ -794,8 +795,8 @@ void kernel_main()
     pit_init_100hz();
     clear_screen();
 
-    print("Atlas32\n");
-    print("32-bit protected mode kernel\n\n");
+    print("Atlas64\n");
+    print("64-bit long mode kernel\n\n");
 
     print("Type help for commands\n\n");
 
