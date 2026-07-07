@@ -1,28 +1,31 @@
-/* Atlas32 x86 32-bit kernel linker script */
+/* Atlas64 x86-64 kernel linker script */
 
+OUTPUT_FORMAT(elf64-x86-64)
+OUTPUT_ARCH(i386:x86-64)
 ENTRY(_start)
 
 SECTIONS
 {
-    . = 0x1000;
+    . = 0x10000;
 
     .text :
     {
-        *(.text)
+        *(.text*)
     }
 
     .rodata :
     {
-        *(.rodata)
+        *(.rodata*)
     }
 
     .data :
     {
-        *(.data)
+        *(.data*)
     }
 
     .bss :
     {
-        *(.bss)
+        *(COMMON)
+        *(.bss*)
     }
 }
