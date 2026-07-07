@@ -1,5 +1,5 @@
 #!/bin/bash
-# Atlas32 Run Script
+# Atlas64 Run Script
 
 set -e
 
@@ -13,21 +13,22 @@ require_tool() {
     fi
 }
 
-require_tool qemu-system-i386
+require_tool qemu-system-x86_64
 
-OUTPUT_IMAGE="atlas32.img"
+OUTPUT_IMAGE="atlas64.img"
 
 if [ ! -f "$OUTPUT_IMAGE" ]; then
     echo "$OUTPUT_IMAGE not found."
     exit 1
 fi
 
-echo "Running Atlas32..."
+echo "Running Atlas64..."
 echo
 
-AUDIO_DRIVER="${ATLAS32_AUDIO_DRIVER:-pa}"
+AUDIO_DRIVER="${ATLAS64_AUDIO_DRIVER:-pa}"
 
-qemu-system-i386 \
+qemu-system-x86_64 \
+    -m 128M \
     -machine pc,pcspk-audiodev=audio0 \
     -audiodev "${AUDIO_DRIVER},id=audio0" \
     -drive file="$OUTPUT_IMAGE",format=raw,if=floppy \
